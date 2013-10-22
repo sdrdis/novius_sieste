@@ -5,7 +5,7 @@ $_SERVER['NOS_ROOT'] = realpath(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPAR
 
 require_once $_SERVER['NOS_ROOT'].DIRECTORY_SEPARATOR.'novius-os'.DIRECTORY_SEPARATOR.'framework'.DIRECTORY_SEPARATOR.'bootstrap.php';
 
-
+\Log::error('CALLED SAVE_DATA WITH '.print_r($_GET, true));
 if (isset($_GET['v'])) {
     $values = explode('|', $_GET['v']);
     $averages = explode('|', $_GET['a']);
@@ -15,9 +15,6 @@ if (isset($_GET['v'])) {
     $set->set_type = $_GET['t'] == 'b' ? 'boom' : 'periodic';
     $set->save();
 
-    $values = array();
-
-    var_dump($values);
     foreach ($values as $key => $value) {
         $data = new \Novius\Sieste\Model_Data();
         $data->data_set_id = $set->set_id;
@@ -25,7 +22,6 @@ if (isset($_GET['v'])) {
         $data->data_capt_value = $value;
         $data->data_capt_average = $averages[$key];
         $data->save();
-        $values[$key] = $value;
     }
 
     echo 'OK';
