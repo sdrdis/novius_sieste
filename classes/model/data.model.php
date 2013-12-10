@@ -13,6 +13,7 @@ class Model_Data extends \Nos\Orm\Model
         'data_set_id',
         'data_capt_id',
         'data_capt_value',
+        'data_type',
     );
 
     protected static $_behaviours = array();
